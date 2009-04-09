@@ -1,7 +1,7 @@
 module Nanoc::Filters
   class RelativizePathsInHTML < Nanoc::Filter
 
-    identifiers :relativize_paths, :relativize_paths_in_html
+    identifier :relativize_paths_in_html
 
     require 'nanoc/helpers/link_to'
     include Nanoc::Helpers::LinkTo

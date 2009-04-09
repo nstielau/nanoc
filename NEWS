@@ -1,6 +1,12 @@
 nanoc Release Notes
 ===================
 
+2.2.2
+-----
+
+* Removed relativize_paths filter; use relativize_paths_in_html or
+  relativize_paths_in_css instead
+
 2.2.1
 -----
 
