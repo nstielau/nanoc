@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::Filters::RelativizePathsInHTMLInHTMLTest < MiniTest::Unit::TestCase
+class Nanoc::Filters::RelativizePathsInHTMLTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -59,7 +59,7 @@ class Nanoc::Filters::RelativizePathsInHTMLInHTMLTest < MiniTest::Unit::TestCase
     assert_equal(expected_content, actual_content)
   end
 
-  def test_filter_html_without_quotes
+  def test_filter_without_quotes
     # Mock page and site
     page = mock
     site = mock
@@ -86,7 +86,7 @@ class Nanoc::Filters::RelativizePathsInHTMLInHTMLTest < MiniTest::Unit::TestCase
     assert_equal(expected_content, actual_content)
   end
 
-  def test_filter_html_multiple
+  def test_filter_multiple
     # Mock page and site
     page = mock
     site = mock
