@@ -6,6 +6,8 @@ nanoc Release Notes
 
 * Removed relativize_paths filter; use relativize_paths_in_html or
   relativize_paths_in_css instead
+* Fixed bug which could cause nanoc to eat massive amounts of memory when an
+  exception occurs
 
 2.2.1
 -----
