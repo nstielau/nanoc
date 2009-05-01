@@ -89,7 +89,7 @@ module Nanoc::Helpers
 
       # Get source and destination paths
       dst_path   = Pathname.new(path)
-      src_path   = Pathname.new((@page || @asset).path)
+      src_path   = Pathname.new((defined?(@page) ? @page : @asset).path)
 
       # Calculate elative path (method depends on whether destination is a
       # directory or not).
