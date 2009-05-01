@@ -272,6 +272,10 @@ module Nanoc
       File.open(self.disk_path, 'w') { |io| io.write(current_content) }
     end
 
+    def inspect
+      "<#{self.class} name=#{self.name} asset.path=#{self.asset.path}>"
+    end
+
   end
 
 end

@@ -108,6 +108,10 @@ module Nanoc
       end
     end
 
+    def inspect
+      "<#{self.class} path=#{self.path}>"
+    end
+
   end
 
 end

@@ -315,6 +315,10 @@ module Nanoc
       end
     end
 
+    def inspect
+      "<#{self.class} name=#{self.name} page.path=#{self.page.path}>"
+    end
+
   end
 
 end
