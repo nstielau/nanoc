@@ -20,7 +20,8 @@ namespace :doc do
     yardoc_files   = Dir.glob('lib/nanoc/base/**/*.rb') +
                      Dir.glob('lib/nanoc/data_sources/**/*.rb') +
                      Dir.glob('lib/nanoc/extra/**/*.rb') +
-                     Dir.glob('lib/nanoc/helpers/**/*.rb')
+                     Dir.glob('lib/nanoc/helpers/**/*.rb') +
+                     Dir.glob('lib/nanoc/routers/**/*.rb')
     yardoc_options = [
       '--verbose',
       '--readme', 'README'
