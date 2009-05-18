@@ -695,12 +695,21 @@ class Nanoc::DataSources::FilesystemTest < MiniTest::Unit::TestCase
 
   def test_compile_huge_site
     with_temp_site do |site|
-      # Create a lot of pages
+      # Get maximum number of open files
       count = Process.getrlimit(Process::RLIMIT_NOFILE)[0] + 5
+
+      # Create a lot of pages
       count.times do |i|
         FileUtils.mkdir("content/#{i}")
         File.open("content/#{i}/#{i}.html", 'w') { |io| io << "This is page #{i}." }
         File.open("content/#{i}/#{i}.yaml", 'w') { |io| io << "title: Page #{i}"   }
+      end
+
+      # Create a lot of assets
+      count.times do |i|
+        FileUtils.mkdir("assets/#{i}")
+        File.open("assets/#{i}/#{i}.dat",  'w') { |io| io << "This is asset #{i}." }
+        File.open("assets/#{i}/#{i}.yaml", 'w') { |io| io << "binary: true"        }
       end
 
       # Load and compile site

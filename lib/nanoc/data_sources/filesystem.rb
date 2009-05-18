@@ -216,7 +216,7 @@ module Nanoc::DataSources
 
         # Get content file
         content_filename = content_filename_for_dir(File.dirname(meta_filename))
-        content_file = File.new(content_filename)
+        content_file = Nanoc::Extra::FileProxy.new(content_filename)
 
         # Get attributes
         attributes = { 'extension' => File.extname(content_filename)[1..-1] }.merge(meta)
