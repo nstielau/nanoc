@@ -133,9 +133,10 @@ module Nanoc::CLI
           print_profiling_feedback(reps)
         end
       rescue Interrupt => e
-        exit
+        exit(1)
       rescue Exception => e
         print_error(e)
+        exit(1)
       end
     end
 
