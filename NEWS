@@ -1,6 +1,13 @@
 nanoc Release Notes
 ===================
 
+2.2.3
+-----
+
+* Renamed the nanoc executable to nanoc2
+* Renamed the nanoc gem to nanoc2
+* Renamed the Nanoc module to Nanoc2
+
 2.2.2
 -----
 
