@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::AssetDefaultsTest < MiniTest::Unit::TestCase
+class Nanoc2::AssetDefaultsTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -10,7 +10,7 @@ class Nanoc::AssetDefaultsTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create asset defaults
-    asset_defaults = Nanoc::AssetDefaults.new({ :foo => 'bar' })
+    asset_defaults = Nanoc2::AssetDefaults.new({ :foo => 'bar' })
     asset_defaults.site = site
 
     # Create data source

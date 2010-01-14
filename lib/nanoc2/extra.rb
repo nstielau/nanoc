@@ -1,0 +1,6 @@
+require 'nanoc2/extra/auto_compiler'
+require 'nanoc2/extra/context'
+require 'nanoc2/extra/core_ext'
+require 'nanoc2/extra/file_proxy'
+require 'nanoc2/extra/vcs'
+require 'nanoc2/extra/vcses'

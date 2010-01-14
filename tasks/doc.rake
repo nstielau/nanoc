@@ -17,11 +17,11 @@ namespace :doc do
     FileUtils.rm_r 'doc' if File.exist?('doc')
 
     # Get options
-    yardoc_files   = Dir.glob('lib/nanoc/base/**/*.rb') +
-                     Dir.glob('lib/nanoc/data_sources/**/*.rb') +
-                     Dir.glob('lib/nanoc/extra/**/*.rb') +
-                     Dir.glob('lib/nanoc/helpers/**/*.rb') +
-                     Dir.glob('lib/nanoc/routers/**/*.rb')
+    yardoc_files   = Dir.glob('lib/nanoc2/base/**/*.rb') +
+                     Dir.glob('lib/nanoc2/data_sources/**/*.rb') +
+                     Dir.glob('lib/nanoc2/extra/**/*.rb') +
+                     Dir.glob('lib/nanoc2/helpers/**/*.rb') +
+                     Dir.glob('lib/nanoc2/routers/**/*.rb')
     yardoc_options = [
       '--verbose',
       '--readme', 'README'

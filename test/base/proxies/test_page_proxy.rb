@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::PageProxyTest < MiniTest::Unit::TestCase
+class Nanoc2::PageProxyTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -19,7 +19,7 @@ class Nanoc::PageProxyTest < MiniTest::Unit::TestCase
     page.expects(:attribute_named).with(:'blah!').returns('page attr blah!')
 
     # Get page proxy
-    page_proxy = Nanoc::PageProxy.new(page)
+    page_proxy = Nanoc2::PageProxy.new(page)
 
     # Test
     assert_equal('page rep web path',       page_proxy.path)
@@ -39,9 +39,9 @@ class Nanoc::PageProxyTest < MiniTest::Unit::TestCase
     page_rep_1.expects(:attribute_named).with(:baz).returns('quux')
 
     # Get page reps proxies
-    page_rep_0_proxy = Nanoc::PageRepProxy.new(page_rep_0)
+    page_rep_0_proxy = Nanoc2::PageRepProxy.new(page_rep_0)
     page_rep_0.expects(:to_proxy).returns(page_rep_0_proxy)
-    page_rep_1_proxy = Nanoc::PageRepProxy.new(page_rep_1)
+    page_rep_1_proxy = Nanoc2::PageRepProxy.new(page_rep_1)
     page_rep_1.expects(:to_proxy).returns(page_rep_1_proxy)
 
     # Get page
@@ -49,7 +49,7 @@ class Nanoc::PageProxyTest < MiniTest::Unit::TestCase
     page.expects(:reps).times(2).returns([ page_rep_0, page_rep_1 ])
 
     # Get page proxy
-    page_proxy = Nanoc::PageProxy.new(page)
+    page_proxy = Nanoc2::PageProxy.new(page)
 
     # Test
     assert_equal('bar',  page_proxy.reps(:default).foo)

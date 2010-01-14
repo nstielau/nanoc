@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::EnhancementsTest < MiniTest::Unit::TestCase
+class Nanoc2::EnhancementsTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end

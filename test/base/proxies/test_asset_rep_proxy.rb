@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::AssetRepProxyTest < MiniTest::Unit::TestCase
+class Nanoc2::AssetRepProxyTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -11,7 +11,7 @@ class Nanoc::AssetRepProxyTest < MiniTest::Unit::TestCase
     asset.expects(:attribute_named).with(:moo).returns('asset attr moo')
 
     # Get asset proxy
-    asset_proxy = Nanoc::AssetProxy.new(asset)
+    asset_proxy = Nanoc2::AssetProxy.new(asset)
     asset.expects(:to_proxy).returns(asset_proxy)
 
     # Get asset rep
@@ -23,7 +23,7 @@ class Nanoc::AssetRepProxyTest < MiniTest::Unit::TestCase
     asset_rep.expects(:attribute_named).with(:'blah!').returns('asset rep attr blah!')
 
     # Get asset proxy
-    asset_rep_proxy = Nanoc::AssetRepProxy.new(asset_rep)
+    asset_rep_proxy = Nanoc2::AssetRepProxy.new(asset_rep)
 
     # Test
     assert_equal('asset rep name',        asset_rep_proxy.name)

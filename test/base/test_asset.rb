@@ -1,17 +1,17 @@
 require 'test/helper'
 
-class Nanoc::AssetTest < MiniTest::Unit::TestCase
+class Nanoc2::AssetTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
   def test_initialize
     # Make sure attributes are cleaned
-    asset = Nanoc::Asset.new(nil, { 'foo' => 'bar' }, '/foo/')
+    asset = Nanoc2::Asset.new(nil, { 'foo' => 'bar' }, '/foo/')
     assert_equal({ :foo => 'bar' }, asset.attributes)
 
     # Make sure path is fixed
-    asset = Nanoc::Asset.new(nil, { 'foo' => 'bar' }, 'foo')
+    asset = Nanoc2::Asset.new(nil, { 'foo' => 'bar' }, 'foo')
     assert_equal('/foo/', asset.path)
   end
 
@@ -25,7 +25,7 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
     site.expects(:asset_defaults).returns(asset_defaults)
 
     # Create asset
-    asset = Nanoc::Asset.new(nil, { :foo => 'bar' }, '/foo/')
+    asset = Nanoc2::Asset.new(nil, { :foo => 'bar' }, '/foo/')
     asset.site = site
     asset.build_reps
 
@@ -49,7 +49,7 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
     site.expects(:asset_defaults).returns(asset_defaults)
 
     # Create asset
-    asset = Nanoc::Asset.new(nil, { :foo => 'bar' }, '/foo/')
+    asset = Nanoc2::Asset.new(nil, { :foo => 'bar' }, '/foo/')
     asset.site = site
     asset.build_reps
 
@@ -70,7 +70,7 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
 
     # Create asset
     reps = { :default => {}, :raw => {} }
-    asset = Nanoc::Asset.new(nil, { :reps => reps }, '/foo/')
+    asset = Nanoc2::Asset.new(nil, { :reps => reps }, '/foo/')
     asset.site = site
     asset.build_reps
 
@@ -96,7 +96,7 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
 
     # Create asset
     reps = { :default => {}, :something => {} }
-    asset = Nanoc::Asset.new(nil, { :reps => reps }, '/foo/')
+    asset = Nanoc2::Asset.new(nil, { :reps => reps }, '/foo/')
     asset.site = site
     asset.build_reps
 
@@ -123,7 +123,7 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
 
     # Create asset
     reps = { :baz => {}, :quux => {} }
-    asset = Nanoc::Asset.new(nil, { :reps => reps }, '/foo/')
+    asset = Nanoc2::Asset.new(nil, { :reps => reps }, '/foo/')
     asset.site = site
     asset.build_reps
 
@@ -134,7 +134,7 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
 
   def test_to_proxy
     # Create asset
-    asset = Nanoc::Asset.new(nil, { 'foo' => 'bar' }, '/foo/')
+    asset = Nanoc2::Asset.new(nil, { 'foo' => 'bar' }, '/foo/')
 
     # Create proxy
     asset_proxy = asset.to_proxy
@@ -150,14 +150,14 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
 
       in_dir [ 'testing' ] do
         # Get site
-        site = Nanoc::Site.new({})
+        site = Nanoc2::Site.new({})
 
         # Create asset defaults (hacky...)
-        asset_defaults = Nanoc::AssetDefaults.new({ :quux => 'stfu' })
+        asset_defaults = Nanoc2::AssetDefaults.new({ :quux => 'stfu' })
         site.instance_eval { @asset_defaults = asset_defaults }
 
         # Create asset
-        asset = Nanoc::Asset.new("content", { 'foo' => 'bar' }, '/foo/')
+        asset = Nanoc2::Asset.new("content", { 'foo' => 'bar' }, '/foo/')
         asset.site = site
 
         # Test
@@ -166,7 +166,7 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
         assert_equal('stfu', asset.attribute_named(:quux))
 
         # Create asset
-        asset = Nanoc::Asset.new("content", { 'extension' => 'png' }, '/foo/')
+        asset = Nanoc2::Asset.new("content", { 'extension' => 'png' }, '/foo/')
         asset.site = site
 
         # Test
@@ -182,7 +182,7 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create asset
-    asset = Nanoc::Asset.new("content", { :attr => 'ibutes' }, '/path/')
+    asset = Nanoc2::Asset.new("content", { :attr => 'ibutes' }, '/path/')
     asset.site = site
 
     # Create data source
@@ -200,7 +200,7 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create asset
-    asset = Nanoc::Asset.new("content", { :attr => 'ibutes' }, '/path/')
+    asset = Nanoc2::Asset.new("content", { :attr => 'ibutes' }, '/path/')
     asset.site = site
 
     # Create data source
@@ -218,7 +218,7 @@ class Nanoc::AssetTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create asset
-    asset = Nanoc::Asset.new("content", { :attr => 'ibutes' }, '/path/')
+    asset = Nanoc2::Asset.new("content", { :attr => 'ibutes' }, '/path/')
     asset.site = site
 
     # Create data source

@@ -1,19 +1,19 @@
 require 'test/helper'
 
-class Nanoc::SiteTest < MiniTest::Unit::TestCase
+class Nanoc2::SiteTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
-  class TestDataSource < Nanoc::DataSource
+  class TestDataSource < Nanoc2::DataSource
 
     identifier :test_data_source
 
-    def code ; Nanoc::Code.new('') ; end
+    def code ; Nanoc2::Code.new('') ; end
 
   end
 
-  class TestOldschoolDataSource < Nanoc::DataSource
+  class TestOldschoolDataSource < Nanoc2::DataSource
 
     identifier :test_oldschool_data_source
 
@@ -61,24 +61,24 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
 
   end
 
-  class TestNewschoolDataSource < Nanoc::DataSource
+  class TestNewschoolDataSource < Nanoc2::DataSource
 
     identifier :test_newschool_data_source
 
     def pages
       [
-        Nanoc::Page.new("Hi!",          {}, '/'),
-        Nanoc::Page.new("Hello there.", {}, '/about/')
+        Nanoc2::Page.new("Hi!",          {}, '/'),
+        Nanoc2::Page.new("Hello there.", {}, '/about/')
       ]
     end
 
     def page_defaults
-      Nanoc::PageDefaults.new({ :foo => 'bar' })
+      Nanoc2::PageDefaults.new({ :foo => 'bar' })
     end
 
     def layouts
       [
-        Nanoc::Layout.new(
+        Nanoc2::Layout.new(
           'HEADER <%= @page.content %> FOOTER',
           { :filter => 'erb' },
           '/quux/'
@@ -88,34 +88,34 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
 
     def templates
       [
-        Nanoc::Template.new('Content Here', { :foo => 'bar' }, 'default')
+        Nanoc2::Template.new('Content Here', { :foo => 'bar' }, 'default')
       ]
     end
 
     def code
-      Nanoc::Code.new("def something_random ; 'something random, yah' ; end")
+      Nanoc2::Code.new("def something_random ; 'something random, yah' ; end")
     end
 
   end
 
-  class TestEarlyLoadingCodeDataSource < Nanoc::DataSource
+  class TestEarlyLoadingCodeDataSource < Nanoc2::DataSource
 
     identifier :early_loading_code_data_source
 
     def pages
       [
-        Nanoc::Page.new("Hi!",          {}, '/'),
-        Nanoc::Page.new("Hello there.", {}, '/about/')
+        Nanoc2::Page.new("Hi!",          {}, '/'),
+        Nanoc2::Page.new("Hello there.", {}, '/about/')
       ]
     end
 
     def page_defaults
-      Nanoc::PageDefaults.new({ :foo => 'bar' })
+      Nanoc2::PageDefaults.new({ :foo => 'bar' })
     end
 
     def layouts
       [
-        Nanoc::Layout.new(
+        Nanoc2::Layout.new(
           'HEADER <%= @page.content %> FOOTER',
           { :filter => 'erb' },
           '/quux/'
@@ -125,13 +125,13 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
 
     def templates
       [
-        Nanoc::Template.new('Content Here', { :foo => 'bar' }, 'default')
+        Nanoc2::Template.new('Content Here', { :foo => 'bar' }, 'default')
       ]
     end
 
     def code
-      Nanoc::Code.new(
-        "class TestEarlyLoadingCodeRouter < Nanoc::Router\n" +
+      Nanoc2::Code.new(
+        "class TestEarlyLoadingCodeRouter < Nanoc2::Router\n" +
         "  identifier :early_loading_code_router\n" +
         "  def web_path_for(page)  ; 'web path'  ; end\n" +
         "  def disk_path_for(page) ; 'disk path' ; end\n" +
@@ -141,7 +141,7 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
 
   end
 
-  class TestRouter < Nanoc::Router
+  class TestRouter < Nanoc2::Router
 
     identifier :test_router
 
@@ -154,15 +154,15 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
 
       in_dir [ 'testing' ] do
         # Test everything okay
-        Nanoc::Site.new(
+        Nanoc2::Site.new(
           :output_dir   => 'output',
           :data_source  => 'filesystem',
           :router       => 'default'
         )
 
         # Test unknown data source
-        assert_raises(Nanoc::Errors::UnknownDataSourceError) do
-          Nanoc::Site.new(
+        assert_raises(Nanoc2::Errors::UnknownDataSourceError) do
+          Nanoc2::Site.new(
             :output_dir   => 'output',
             :data_source  => 'kasdflksafjlksdjaklfkjdsjakf',
             :router       => 'default'
@@ -170,8 +170,8 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
         end
 
         # Test unknown router
-        assert_raises(Nanoc::Errors::UnknownRouterError) do
-          Nanoc::Site.new(
+        assert_raises(Nanoc2::Errors::UnknownRouterError) do
+          Nanoc2::Site.new(
             :output_dir   => 'output',
             :data_source  => 'filesystem',
             :router       => 'kasdflksafjlksdjaklfkjdsjakf'
@@ -182,7 +182,7 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
   end
 
   def test_initialize_custom_router
-    Nanoc::Site.new(
+    Nanoc2::Site.new(
       :output_dir   => 'output',
       :data_source  => 'early_loading_code_data_source',
       :router       => 'early_loading_code_router'
@@ -191,15 +191,15 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
 
   def test_load_data
     # Create site with oldschool data source
-    site = Nanoc::Site.new(:data_source => 'test_oldschool_data_source')
+    site = Nanoc2::Site.new(:data_source => 'test_oldschool_data_source')
     site.load_data
 
     # Check classes
-    assert(site.pages.all? { |p| p.is_a?(Nanoc::Page) })
-    assert(site.page_defaults.is_a?(Nanoc::PageDefaults))
-    assert(site.layouts.all? { |l| l.is_a?(Nanoc::Layout) })
-    assert(site.templates.all? { |t| t.is_a?(Nanoc::Template) })
-    assert(site.code.is_a?(Nanoc::Code))
+    assert(site.pages.all? { |p| p.is_a?(Nanoc2::Page) })
+    assert(site.page_defaults.is_a?(Nanoc2::PageDefaults))
+    assert(site.layouts.all? { |l| l.is_a?(Nanoc2::Layout) })
+    assert(site.templates.all? { |t| t.is_a?(Nanoc2::Template) })
+    assert(site.code.is_a?(Nanoc2::Code))
 
     # Check whether site is set
     assert(site.pages.all? { |p| p.site == site })
@@ -209,15 +209,15 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
     assert(site.code.site == site)
 
     # Create site with newschool data source
-    site = Nanoc::Site.new(:data_source => 'test_newschool_data_source')
+    site = Nanoc2::Site.new(:data_source => 'test_newschool_data_source')
     site.load_data
 
     # Check classes
-    assert(site.pages.all? { |p| p.is_a?(Nanoc::Page) })
-    assert(site.page_defaults.is_a?(Nanoc::PageDefaults))
-    assert(site.layouts.all? { |l| l.is_a?(Nanoc::Layout) })
-    assert(site.templates.all? { |t| t.is_a?(Nanoc::Template) })
-    assert(site.code.is_a?(Nanoc::Code))
+    assert(site.pages.all? { |p| p.is_a?(Nanoc2::Page) })
+    assert(site.page_defaults.is_a?(Nanoc2::PageDefaults))
+    assert(site.layouts.all? { |l| l.is_a?(Nanoc2::Layout) })
+    assert(site.templates.all? { |t| t.is_a?(Nanoc2::Template) })
+    assert(site.code.is_a?(Nanoc2::Code))
 
     # Check whether site is set
     assert(site.pages.all? { |p| p.site == site })
@@ -235,7 +235,7 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
 
       in_dir [ 'testing' ] do
         # Create site
-        site = Nanoc::Site.new(
+        site = Nanoc2::Site.new(
           :output_dir   => 'custom_output',
           :data_source  => 'test_data_source',
           :router       => 'test_router'
@@ -247,7 +247,7 @@ class Nanoc::SiteTest < MiniTest::Unit::TestCase
         assert_equal('test_router',       site.config[:router])
 
         # Create site
-        site = Nanoc::Site.new({})
+        site = Nanoc2::Site.new({})
 
         # Check
         assert_equal('output',      site.config[:output_dir])

@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::Filters::RainpressTest < MiniTest::Unit::TestCase
+class Nanoc2::Filters::RainpressTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -16,11 +16,11 @@ class Nanoc::Filters::RainpressTest < MiniTest::Unit::TestCase
 
       # Create page rep
       page_rep = mock
-      page_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+      page_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
       page_rep.expects(:page).returns(page)
 
       # Create filter
-      filter = ::Nanoc::Filters::Rainpress.new(page_rep)
+      filter = ::Nanoc2::Filters::Rainpress.new(page_rep)
 
       # Run filter
       result = filter.run("body { color: black; }")

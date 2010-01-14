@@ -1,12 +1,12 @@
 require 'test/helper'
 
-class Nanoc::Helpers::BloggingTest < MiniTest::Unit::TestCase
+class Nanoc2::Helpers::BloggingTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
-  include Nanoc::Helpers::Blogging
-  include Nanoc::Helpers::Text
+  include Nanoc2::Helpers::Blogging
+  include Nanoc2::Helpers::Text
 
   def test_articles
     # Create pages

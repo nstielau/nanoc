@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+# Add lib to load path
+$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/../lib'))
+
+# Load nanoc
+require 'nanoc2'
+require 'nanoc2/cli'
+
+# Load custom code that can't be load later
+Dir['lib/commands/*.rb'].each     { |f| require f }
+Dir['lib/data_sources/*.rb'].each { |f| require f }
+
+# Run base
+Nanoc2::CLI::Base.new.run(ARGV)

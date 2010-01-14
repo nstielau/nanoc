@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::Filters::RelativizePathsInHTMLTest < MiniTest::Unit::TestCase
+class Nanoc2::Filters::RelativizePathsInHTMLTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -11,11 +11,11 @@ class Nanoc::Filters::RelativizePathsInHTMLTest < MiniTest::Unit::TestCase
     site = mock
     page.expects(:site).returns(site)
     obj_rep = mock
-    obj_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+    obj_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
     obj_rep.expects(:page).returns(page)
 
     # Create filter with mock item
-    filter = Nanoc::Filters::RelativizePathsInHTML.new(obj_rep)
+    filter = Nanoc2::Filters::RelativizePathsInHTML.new(obj_rep)
 
     # Mock item
     filter.instance_eval do
@@ -38,11 +38,11 @@ class Nanoc::Filters::RelativizePathsInHTMLTest < MiniTest::Unit::TestCase
     site = mock
     page.expects(:site).returns(site)
     obj_rep = mock
-    obj_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+    obj_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
     obj_rep.expects(:page).returns(page)
 
     # Create filter with mock item
-    filter = Nanoc::Filters::RelativizePathsInHTML.new(obj_rep)
+    filter = Nanoc2::Filters::RelativizePathsInHTML.new(obj_rep)
 
     # Mock item
     filter.instance_eval do
@@ -65,11 +65,11 @@ class Nanoc::Filters::RelativizePathsInHTMLTest < MiniTest::Unit::TestCase
     site = mock
     page.expects(:site).returns(site)
     obj_rep = mock
-    obj_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+    obj_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
     obj_rep.expects(:page).returns(page)
 
     # Create filter with mock item
-    filter = Nanoc::Filters::RelativizePathsInHTML.new(obj_rep)
+    filter = Nanoc2::Filters::RelativizePathsInHTML.new(obj_rep)
 
     # Mock item
     filter.instance_eval do
@@ -92,11 +92,11 @@ class Nanoc::Filters::RelativizePathsInHTMLTest < MiniTest::Unit::TestCase
     site = mock
     page.expects(:site).returns(site)
     obj_rep = mock
-    obj_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+    obj_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
     obj_rep.expects(:page).returns(page)
 
     # Create filter with mock item
-    filter = Nanoc::Filters::RelativizePathsInHTML.new(obj_rep)
+    filter = Nanoc2::Filters::RelativizePathsInHTML.new(obj_rep)
 
     # Mock item
     filter.instance_eval do

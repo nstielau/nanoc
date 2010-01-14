@@ -15,12 +15,12 @@ require 'stringio'
 
 # Load nanoc
 $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/../lib'))
-require 'nanoc'
-require 'nanoc/cli'
+require 'nanoc2'
+require 'nanoc2/cli'
 
 def with_site_fixture(a_fixture)
   in_dir(['test', 'fixtures', a_fixture]) do
-    yield(Nanoc::Site.new(YAML.load_file('config.yaml')))
+    yield(Nanoc2::Site.new(YAML.load_file('config.yaml')))
   end
 end
 
@@ -31,7 +31,7 @@ def with_temp_site(data_source='filesystem')
 
     in_dir %w{ site } do
       # Load site
-      site = Nanoc::Site.new(YAML.load_file('config.yaml'))
+      site = Nanoc2::Site.new(YAML.load_file('config.yaml'))
       site.load_data
 
       # Done
@@ -49,19 +49,19 @@ ensure
 end
 
 def create_site(name, data_source='filesystem')
-  Nanoc::CLI::Base.new.run(['create_site', name, '-d', data_source])
+  Nanoc2::CLI::Base.new.run(['create_site', name, '-d', data_source])
 end
 
 def create_layout(name)
-  Nanoc::CLI::Base.new.run(['create_layout', name])
+  Nanoc2::CLI::Base.new.run(['create_layout', name])
 end
 
 def create_page(name)
-  Nanoc::CLI::Base.new.run(['create_page', name])
+  Nanoc2::CLI::Base.new.run(['create_page', name])
 end
 
 def create_template(name)
-  Nanoc::CLI::Base.new.run(['create_template', name])
+  Nanoc2::CLI::Base.new.run(['create_template', name])
 end
 
 def if_have(x)

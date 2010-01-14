@@ -1,13 +1,13 @@
 require 'test/helper'
 
-class Nanoc::Helpers::RenderTest < MiniTest::Unit::TestCase
+class Nanoc2::Helpers::RenderTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
   def test_render
     # Create layout
-    layout = Nanoc::Layout.new(
+    layout = Nanoc2::Layout.new(
       'Hi, this is the <%= @page.title %> page',
       { :filter => 'erb' },
       '/foo/'
@@ -25,9 +25,9 @@ class Nanoc::Helpers::RenderTest < MiniTest::Unit::TestCase
     site.expects(:compiler).at_least_once.returns(compiler)
 
     # Create pages
-    page = Nanoc::Page.new('page content', { :title => 'Sample' }, '/')
+    page = Nanoc2::Page.new('page content', { :title => 'Sample' }, '/')
     page.site = site
-    page_rep = Nanoc::PageRep.new(page, {}, :default)
+    page_rep = Nanoc2::PageRep.new(page, {}, :default)
     page.reps << page_rep
 
     # Set object and its rep
@@ -40,7 +40,7 @@ class Nanoc::Helpers::RenderTest < MiniTest::Unit::TestCase
 
   def test_render_with_other_assigns
     # Create layout
-    layout = Nanoc::Layout.new(
+    layout = Nanoc2::Layout.new(
       'Foo <%= @middle %> Baz',
       { :filter => 'erb' },
       '/foo/'
@@ -58,9 +58,9 @@ class Nanoc::Helpers::RenderTest < MiniTest::Unit::TestCase
     site.expects(:compiler).at_least_once.returns(compiler)
 
     # Create pages
-    page = Nanoc::Page.new('page content', { :title => 'Sample' }, '/')
+    page = Nanoc2::Page.new('page content', { :title => 'Sample' }, '/')
     page.site = site
-    page_rep = Nanoc::PageRep.new(page, {}, :default)
+    page_rep = Nanoc2::PageRep.new(page, {}, :default)
     page.reps << page_rep
 
     # Set object and its rep
@@ -77,9 +77,9 @@ class Nanoc::Helpers::RenderTest < MiniTest::Unit::TestCase
     site.expects(:layouts).returns([])
 
     # Create pages
-    page = Nanoc::Page.new('page content', { :title => 'Sample' }, '/')
+    page = Nanoc2::Page.new('page content', { :title => 'Sample' }, '/')
     page.site = site
-    page_rep = Nanoc::PageRep.new(page, {}, :default)
+    page_rep = Nanoc2::PageRep.new(page, {}, :default)
     page.reps << page_rep
 
     # Set object and its rep
@@ -87,14 +87,14 @@ class Nanoc::Helpers::RenderTest < MiniTest::Unit::TestCase
     @_obj_rep = page_rep
 
     # Render
-    assert_raises(Nanoc::Errors::UnknownLayoutError) do
+    assert_raises(Nanoc2::Errors::UnknownLayoutError) do
       render('/fawgooafwagwfe/')
     end
   end
 
   def test_render_with_unknown_filter
     # Create layout
-    layout = Nanoc::Layout.new(
+    layout = Nanoc2::Layout.new(
       'Foo',
       { :filter => 'afafedhrdjdhrwegfwe' },
       '/foo/'
@@ -105,9 +105,9 @@ class Nanoc::Helpers::RenderTest < MiniTest::Unit::TestCase
     site.expects(:layouts).returns([ layout ])
 
     # Create pages
-    page = Nanoc::Page.new('page content', { :title => 'Sample' }, '/')
+    page = Nanoc2::Page.new('page content', { :title => 'Sample' }, '/')
     page.site = site
-    page_rep = Nanoc::PageRep.new(page, {}, :default)
+    page_rep = Nanoc2::PageRep.new(page, {}, :default)
     page.reps << page_rep
 
     # Set object and its rep
@@ -115,7 +115,7 @@ class Nanoc::Helpers::RenderTest < MiniTest::Unit::TestCase
     @_obj_rep = page_rep
 
     # Render
-    assert_raises(Nanoc::Errors::CannotDetermineFilterError) do
+    assert_raises(Nanoc2::Errors::CannotDetermineFilterError) do
       render '/foo/'
     end
   end

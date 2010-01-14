@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::BinaryFilterTest < MiniTest::Unit::TestCase
+class Nanoc2::BinaryFilterTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -8,23 +8,23 @@ class Nanoc::BinaryFilterTest < MiniTest::Unit::TestCase
   def test_initialize
     # Create assets
     asset_rep = mock
-    asset_rep_proxy = Nanoc::Proxy.new(asset_rep)
+    asset_rep_proxy = Nanoc2::Proxy.new(asset_rep)
     asset_rep.expects(:to_proxy).returns(asset_rep_proxy)
     asset_rep.expects(:attribute_named).with(:foo).returns('asset rep attr foo')
     asset = mock
-    asset_proxy = Nanoc::Proxy.new(asset)
+    asset_proxy = Nanoc2::Proxy.new(asset)
     asset.expects(:to_proxy).times(2).returns(asset_proxy)
     asset.expects(:attribute_named).times(2).with(:foo).returns('asset attr foo')
 
     # Create page
     page = mock
-    page_proxy = Nanoc::Proxy.new(page)
+    page_proxy = Nanoc2::Proxy.new(page)
     page.expects(:to_proxy).returns(page_proxy)
     page.expects(:attribute_named).with(:foo).returns('page attr foo')
 
     # Create layout
     layout = mock
-    layout_proxy = Nanoc::Proxy.new(layout)
+    layout_proxy = Nanoc2::Proxy.new(layout)
     layout.expects(:to_proxy).returns(layout_proxy)
     layout.expects(:attribute_named).with(:foo).returns('layout attr foo')
 
@@ -36,7 +36,7 @@ class Nanoc::BinaryFilterTest < MiniTest::Unit::TestCase
     site.expects(:config).returns({})
 
     # Create filter
-    filter = Nanoc::BinaryFilter.new(asset_rep, asset, site)
+    filter = Nanoc2::BinaryFilter.new(asset_rep, asset, site)
 
     # Make sure pages and assets are not proxied by the filter
     assert_equal(
@@ -66,20 +66,20 @@ class Nanoc::BinaryFilterTest < MiniTest::Unit::TestCase
   def test_run
     # Create asset, page, layout
     asset_rep = mock
-    asset_rep_proxy = Nanoc::Proxy.new(asset_rep)
+    asset_rep_proxy = Nanoc2::Proxy.new(asset_rep)
     asset = mock
-    asset_proxy = Nanoc::Proxy.new(asset)
+    asset_proxy = Nanoc2::Proxy.new(asset)
     asset.expects(:to_proxy).returns(asset_proxy)
     asset.expects(:reps).returns([ asset_rep ])
 
     # Create page
     page = mock
-    page_proxy = Nanoc::Proxy.new(page)
+    page_proxy = Nanoc2::Proxy.new(page)
     page.expects(:to_proxy).returns(page_proxy)
 
     # Create layout
     layout = mock
-    layout_proxy = Nanoc::Proxy.new(layout)
+    layout_proxy = Nanoc2::Proxy.new(layout)
     layout.expects(:to_proxy).returns(layout_proxy)
 
     # Create site
@@ -94,7 +94,7 @@ class Nanoc::BinaryFilterTest < MiniTest::Unit::TestCase
     asset_rep = asset.reps[0]
 
     # Create filter
-    filter = Nanoc::BinaryFilter.new(asset_rep, asset, site)
+    filter = Nanoc2::BinaryFilter.new(asset_rep, asset, site)
 
     # Make sure an error is raised
     assert_raises(NotImplementedError) do

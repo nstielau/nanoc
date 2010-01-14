@@ -1,17 +1,17 @@
 require 'test/helper'
 
-class Nanoc::PageTest < MiniTest::Unit::TestCase
+class Nanoc2::PageTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
   def test_initialize
     # Make sure attributes are cleaned
-    page = Nanoc::Page.new("content", { 'foo' => 'bar' }, '/foo/')
+    page = Nanoc2::Page.new("content", { 'foo' => 'bar' }, '/foo/')
     assert_equal({ :foo => 'bar' }, page.attributes)
 
     # Make sure path is fixed
-    page = Nanoc::Page.new("content", { 'foo' => 'bar' }, 'foo')
+    page = Nanoc2::Page.new("content", { 'foo' => 'bar' }, 'foo')
     assert_equal('/foo/', page.path)
   end
 
@@ -25,7 +25,7 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
     site.expects(:page_defaults).returns(page_defaults)
 
     # Create page
-    page = Nanoc::Page.new('blah', { :foo => 'bar' }, '/foo/')
+    page = Nanoc2::Page.new('blah', { :foo => 'bar' }, '/foo/')
     page.site = site
     page.build_reps
 
@@ -49,7 +49,7 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
     site.expects(:page_defaults).returns(page_defaults)
 
     # Create page
-    page = Nanoc::Page.new('blah', { :foo => 'bar' }, '/foo/')
+    page = Nanoc2::Page.new('blah', { :foo => 'bar' }, '/foo/')
     page.site = site
     page.build_reps
 
@@ -70,7 +70,7 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
 
     # Create page
     reps = { :default => {}, :raw => {} }
-    page = Nanoc::Page.new('blah', { :reps => reps }, '/foo/')
+    page = Nanoc2::Page.new('blah', { :reps => reps }, '/foo/')
     page.site = site
     page.build_reps
 
@@ -96,7 +96,7 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
 
     # Create page
     reps = { :default => {}, :something => {} }
-    page = Nanoc::Page.new('blah', { :reps => reps }, '/foo/')
+    page = Nanoc2::Page.new('blah', { :reps => reps }, '/foo/')
     page.site = site
     page.build_reps
 
@@ -123,7 +123,7 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
 
     # Create page
     reps = { :baz => {}, :quux => {} }
-    page = Nanoc::Page.new('blah', { :reps => reps }, '/foo/')
+    page = Nanoc2::Page.new('blah', { :reps => reps }, '/foo/')
     page.site = site
     page.build_reps
 
@@ -134,7 +134,7 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
 
   def test_to_proxy
     # Create page
-    page = Nanoc::Page.new("content", { 'foo' => 'bar' }, '/foo/')
+    page = Nanoc2::Page.new("content", { 'foo' => 'bar' }, '/foo/')
 
     # Create proxy
     page_proxy = page.to_proxy
@@ -150,14 +150,14 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
 
       in_dir [ 'testing' ] do
         # Get site
-        site = Nanoc::Site.new({})
+        site = Nanoc2::Site.new({})
 
         # Create page defaults (hacky...)
-        page_defaults = Nanoc::PageDefaults.new({ :quux => 'stfu' })
+        page_defaults = Nanoc2::PageDefaults.new({ :quux => 'stfu' })
         site.instance_eval { @page_defaults = page_defaults }
 
         # Create page
-        page = Nanoc::Page.new("content", { 'foo' => 'bar' }, '/foo/')
+        page = Nanoc2::Page.new("content", { 'foo' => 'bar' }, '/foo/')
         page.site = site
 
         # Test
@@ -166,7 +166,7 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
         assert_equal('stfu', page.attribute_named(:quux))
 
         # Create page
-        page = Nanoc::Page.new("content", { 'extension' => 'php' }, '/foo/')
+        page = Nanoc2::Page.new("content", { 'extension' => 'php' }, '/foo/')
         page.site = site
 
         # Test
@@ -182,7 +182,7 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create page
-    page = Nanoc::Page.new("content", { :attr => 'ibutes' }, '/path/')
+    page = Nanoc2::Page.new("content", { :attr => 'ibutes' }, '/path/')
     page.site = site
 
     # Create data source
@@ -200,7 +200,7 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create page
-    page = Nanoc::Page.new("content", { :attr => 'ibutes' }, '/path/')
+    page = Nanoc2::Page.new("content", { :attr => 'ibutes' }, '/path/')
     page.site = site
 
     # Create data source
@@ -218,7 +218,7 @@ class Nanoc::PageTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create page
-    page = Nanoc::Page.new("content", { :attr => 'ibutes' }, '/path/')
+    page = Nanoc2::Page.new("content", { :attr => 'ibutes' }, '/path/')
     page.site = site
 
     # Create data source

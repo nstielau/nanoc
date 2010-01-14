@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::CodeTest < MiniTest::Unit::TestCase
+class Nanoc2::CodeTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -10,7 +10,7 @@ class Nanoc::CodeTest < MiniTest::Unit::TestCase
     $complete_insane_parrot = 'meow'
 
     # Create code and load it
-    code = Nanoc::Code.new("$complete_insane_parrot = 'woof'")
+    code = Nanoc2::Code.new("$complete_insane_parrot = 'woof'")
     code.load
 
     # Ensure code is loaded
@@ -22,7 +22,7 @@ class Nanoc::CodeTest < MiniTest::Unit::TestCase
     @foo = 'meow'
 
     # Create code and load it
-    code = Nanoc::Code.new("@foo = 'woof'")
+    code = Nanoc2::Code.new("@foo = 'woof'")
     code.load
 
     # Ensure binding is correct
@@ -34,7 +34,7 @@ class Nanoc::CodeTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create code
-    code = Nanoc::Code.new("@foo = 'woof'")
+    code = Nanoc2::Code.new("@foo = 'woof'")
     code.site = site
 
     # Create data source

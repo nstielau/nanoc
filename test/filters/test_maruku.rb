@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::Filters::MarukuTest < MiniTest::Unit::TestCase
+class Nanoc2::Filters::MarukuTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -16,11 +16,11 @@ class Nanoc::Filters::MarukuTest < MiniTest::Unit::TestCase
 
       # Create page rep
       page_rep = mock
-      page_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+      page_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
       page_rep.expects(:page).returns(page)
 
       # Get filter
-      filter = ::Nanoc::Filters::Maruku.new(page_rep)
+      filter = ::Nanoc2::Filters::Maruku.new(page_rep)
 
       # Run filter
       result = filter.run("This is _so_ *cool*!")

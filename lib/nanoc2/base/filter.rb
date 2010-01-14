@@ -1,0 +1,93 @@
+module Nanoc2
+
+  # Nanoc2::Filter is responsible for filtering pages and textual assets
+  # (binary assets are filtered using Nanoc2::BinaryFilter). It is the
+  # (abstract) superclass for all textual filters. Subclasses should override
+  # the +run+ method.
+  class Filter < Plugin
+
+    # Deprecated
+    EXTENSIONS_MAP = {}
+
+    # Creates a new filter for the given object (page or asset) and site.
+    #
+    # +kind+:: The kind of object that is passed. Can be either +:page+ or
+    #          +:asset+.
+    #
+    # +obj_rep+:: A proxy for the page or asset representation (Nanoc2::PageRep
+    #             or Nanoc2::AssetRep) that should be compiled by this filter.
+    #
+    # +obj+:: A proxy for the page or asset's page (Nanoc2::Page or
+    #         Nanoc2::Asset).
+    #
+    # +site+:: The site (Nanoc2::Site) this filter belongs to.
+    #
+    # +other_assigns+:: A hash containing other variables that should be made
+    #                   available during filtering.
+    def initialize(obj_rep, other_assigns={})
+      # Determine kind
+      @kind = obj_rep.is_a?(Nanoc2::PageRep) ? :page : :asset
+
+      # Set object
+      @obj_rep = obj_rep
+      @obj     = (@kind == :page ? @obj_rep.page : @obj_rep.asset)
+
+      # Set page/asset and page/asset reps
+      if @kind == :page
+        @page       = @obj
+        @page_rep   = @obj_rep
+      else
+        @asset      = @obj
+        @asset_rep  = @obj_rep
+      end
+
+      # Set site
+      @site = @obj.site
+
+      # Set other assigns
+      @other_assigns  = other_assigns
+    end
+
+    # Runs the filter. This method returns the filtered content.
+    #
+    # +content+:: The unprocessed content that should be filtered.
+    #
+    # Subclasses must implement this method.
+    def run(content)
+      raise NotImplementedError.new("Nanoc2::Filter subclasses must implement #run")
+    end
+
+    # Returns a hash with data that should be available.
+    def assigns
+      @assigns ||= @other_assigns.merge({
+        :_obj_rep   => @obj_rep,
+        :_obj       => @obj,
+        :page_rep   => @kind == :page  ? @page_rep.to_proxy  : nil,
+        :page       => @kind == :page  ? @page.to_proxy      : nil,
+        :asset_rep  => @kind == :asset ? @asset_rep.to_proxy : nil,
+        :asset      => @kind == :asset ? @asset.to_proxy     : nil,
+        :pages      => @site.pages.map    { |obj| obj.to_proxy },
+        :assets     => @site.assets.map   { |obj| obj.to_proxy },
+        :layouts    => @site.layouts.map  { |obj| obj.to_proxy },
+        :config     => @site.config,
+        :site       => @site
+      })
+    end
+
+    # Returns the filename associated with the item that is being filtered.
+    # The returned filename is in the format "page <path> (rep <name>)".
+    def filename
+      if assigns[:layout]
+        "layout #{assigns[:layout].path}"
+      elsif assigns[:page]
+        "page #{assigns[:_obj].path} (rep #{assigns[:_obj_rep].name})"
+      elsif assigns[:asset]
+        "asset #{assigns[:_obj].path} (rep #{assigns[:_obj_rep].name})"
+      else
+        '?'
+      end
+    end
+
+  end
+
+end

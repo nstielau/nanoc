@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::FilterTest < MiniTest::Unit::TestCase
+class Nanoc2::FilterTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -11,21 +11,21 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
 
     # Create page
     page = mock
-    page_proxy = Nanoc::Proxy.new(page)
+    page_proxy = Nanoc2::Proxy.new(page)
     page.expects(:to_proxy).times(2).returns(page_proxy)
     page.expects(:site).returns(site)
     page.expects(:attribute_named).times(2).with(:foo).returns('page attr foo')
 
     # Create page rep
     page_rep = mock
-    page_rep_proxy = Nanoc::Proxy.new(page_rep)
+    page_rep_proxy = Nanoc2::Proxy.new(page_rep)
     page_rep.expects(:to_proxy).times(2).returns(page_rep_proxy)
-    page_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+    page_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
     page_rep.expects(:page).returns(page)
     page_rep.expects(:attribute_named).times(2).with(:foo).returns('page rep attr foo')
 
     # Create filter
-    filter = Nanoc::Filter.new(page_rep)
+    filter = Nanoc2::Filter.new(page_rep)
 
     # Test objects
     assert_equal('page attr foo',     filter.instance_eval { @obj.to_proxy.foo })
@@ -46,21 +46,21 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
 
     # Create asset
     asset = mock
-    asset_proxy = Nanoc::Proxy.new(asset)
+    asset_proxy = Nanoc2::Proxy.new(asset)
     asset.expects(:to_proxy).times(2).returns(asset_proxy)
     asset.expects(:site).returns(site)
     asset.expects(:attribute_named).times(2).with(:foo).returns('asset attr foo')
 
     # Create asset rep
     asset_rep = mock
-    asset_rep_proxy = Nanoc::Proxy.new(asset_rep)
+    asset_rep_proxy = Nanoc2::Proxy.new(asset_rep)
     asset_rep.expects(:to_proxy).times(2).returns(asset_rep_proxy)
-    asset_rep.expects(:is_a?).with(Nanoc::PageRep).returns(false)
+    asset_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(false)
     asset_rep.expects(:asset).returns(asset)
     asset_rep.expects(:attribute_named).times(2).with(:foo).returns('asset rep attr foo')
 
     # Create filter
-    filter = Nanoc::Filter.new(asset_rep)
+    filter = Nanoc2::Filter.new(asset_rep)
 
     # Test objects
     assert_equal('asset attr foo',      filter.instance_eval { @obj.to_proxy.foo })
@@ -82,7 +82,7 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
     # Create page
     page_rep = mock
     page = mock
-    page_proxy = Nanoc::Proxy.new(page)
+    page_proxy = Nanoc2::Proxy.new(page)
     page.expects(:to_proxy).returns(page_proxy)
 
     # Create asset
@@ -94,13 +94,13 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
     # Create asset rep
     asset_rep = mock
     asset_rep_proxy = mock
-    asset_rep.expects(:is_a?).with(Nanoc::PageRep).returns(false)
+    asset_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(false)
     asset_rep.expects(:asset).returns(asset)
     asset_rep.expects(:to_proxy).returns(asset_rep_proxy)
 
     # Create layout
     layout = mock
-    layout_proxy = Nanoc::Proxy.new(layout)
+    layout_proxy = Nanoc2::Proxy.new(layout)
     layout.expects(:to_proxy).returns(layout_proxy)
 
     # Create site
@@ -110,7 +110,7 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
     site.expects(:config).returns({ :xxx => 'yyy' })
 
     # Create filter
-    filter = Nanoc::Filter.new(asset_rep, { :foo => 'bar' })
+    filter = Nanoc2::Filter.new(asset_rep, { :foo => 'bar' })
 
     # Check normal assigns
     assert_equal(nil,               filter.assigns[:page])
@@ -132,17 +132,17 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
 
     # Create asset
     asset = mock
-    asset_proxy = Nanoc::Proxy.new(asset)
+    asset_proxy = Nanoc2::Proxy.new(asset)
     asset.expects(:site).returns(site)
 
     # Create asset rep
     asset_rep = mock
-    asset_rep_proxy = Nanoc::Proxy.new(asset_rep)
-    asset_rep.expects(:is_a?).with(Nanoc::PageRep).returns(false)
+    asset_rep_proxy = Nanoc2::Proxy.new(asset_rep)
+    asset_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(false)
     asset_rep.expects(:asset).returns(asset)
 
     # Create filter
-    filter = Nanoc::Filter.new(asset_rep)
+    filter = Nanoc2::Filter.new(asset_rep)
 
     # Make sure an error is raised
     assert_raises(NotImplementedError) do
@@ -156,15 +156,15 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
 
     # Create page
     page = mock
-    page_proxy = Nanoc::Proxy.new(page)
+    page_proxy = Nanoc2::Proxy.new(page)
     page.expects(:path).returns('/foo/bar/baz/')
     page.expects(:site).returns(site)
     page.expects(:to_proxy).returns(page_proxy)
 
     # Create page rep
     page_rep = mock
-    page_rep_proxy = Nanoc::Proxy.new(page_rep)
-    page_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+    page_rep_proxy = Nanoc2::Proxy.new(page_rep)
+    page_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
     page_rep.expects(:page).returns(page)
     page_rep.expects(:name).returns(:quux)
     page_rep.expects(:to_proxy).returns(page_rep_proxy)
@@ -176,7 +176,7 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
     site.expects(:config).returns({})
 
     # Create filter
-    filter = Nanoc::Filter.new(page_rep)
+    filter = Nanoc2::Filter.new(page_rep)
 
     # Check filename
     assert_equal('page /foo/bar/baz/ (rep quux)', filter.filename)
@@ -188,15 +188,15 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
 
     # Create asset
     asset = mock
-    asset_proxy = Nanoc::Proxy.new(asset)
+    asset_proxy = Nanoc2::Proxy.new(asset)
     asset.expects(:path).returns('/foo/bar/baz/')
     asset.expects(:site).returns(site)
     asset.expects(:to_proxy).returns(asset_proxy)
 
     # Create asset rep
     asset_rep = mock
-    asset_rep_proxy = Nanoc::Proxy.new(asset_rep)
-    asset_rep.expects(:is_a?).with(Nanoc::PageRep).returns(false)
+    asset_rep_proxy = Nanoc2::Proxy.new(asset_rep)
+    asset_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(false)
     asset_rep.expects(:asset).returns(asset)
     asset_rep.expects(:name).returns(:quux)
     asset_rep.expects(:to_proxy).returns(asset_rep_proxy)
@@ -208,7 +208,7 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
     site.expects(:config).returns({})
 
     # Create filter
-    filter = Nanoc::Filter.new(asset_rep)
+    filter = Nanoc2::Filter.new(asset_rep)
 
     # Check filename
     assert_equal('asset /foo/bar/baz/ (rep quux)', filter.filename)
@@ -220,14 +220,14 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
 
     # Create asset
     asset = mock
-    asset_proxy = Nanoc::Proxy.new(asset)
+    asset_proxy = Nanoc2::Proxy.new(asset)
     asset.expects(:site).returns(site)
     asset.expects(:to_proxy).returns(asset_proxy)
 
     # Create asset rep
     asset_rep = mock
-    asset_rep_proxy = Nanoc::Proxy.new(asset_rep)
-    asset_rep.expects(:is_a?).with(Nanoc::PageRep).returns(false)
+    asset_rep_proxy = Nanoc2::Proxy.new(asset_rep)
+    asset_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(false)
     asset_rep.expects(:asset).returns(asset)
     asset_rep.expects(:to_proxy).returns(asset_rep_proxy)
 
@@ -242,7 +242,7 @@ class Nanoc::FilterTest < MiniTest::Unit::TestCase
     site.expects(:config).returns({})
 
     # Create filter
-    filter = Nanoc::Filter.new(asset_rep, :layout => layout)
+    filter = Nanoc2::Filter.new(asset_rep, :layout => layout)
 
     # Check filename
     assert_equal('layout /wohba/', filter.filename)

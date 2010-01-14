@@ -1,13 +1,13 @@
 require 'test/helper'
 
-class Nanoc::TemplateTest < MiniTest::Unit::TestCase
+class Nanoc2::TemplateTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
   def test_initialize
     # Make sure attributes are cleaned
-    template = Nanoc::Template.new('content', { 'foo' => 'bar' }, 'sample')
+    template = Nanoc2::Template.new('content', { 'foo' => 'bar' }, 'sample')
     assert_equal({ :foo => 'bar' }, template.page_attributes)
   end
 
@@ -16,7 +16,7 @@ class Nanoc::TemplateTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create template
-    template = Nanoc::Template.new("content", { :attr => 'ibutes'}, 'name')
+    template = Nanoc2::Template.new("content", { :attr => 'ibutes'}, 'name')
     template.site = site
 
     # Create data source
@@ -34,7 +34,7 @@ class Nanoc::TemplateTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create template
-    template = Nanoc::Template.new("content", { :attr => 'ibutes'}, 'name')
+    template = Nanoc2::Template.new("content", { :attr => 'ibutes'}, 'name')
     template.site = site
 
     # Create data source
@@ -52,7 +52,7 @@ class Nanoc::TemplateTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create template
-    template = Nanoc::Template.new("content", { :attr => 'ibutes'}, 'name')
+    template = Nanoc2::Template.new("content", { :attr => 'ibutes'}, 'name')
     template.site = site
 
     # Create data source

@@ -1,12 +1,12 @@
 require 'test/helper'
 
-class Nanoc::Filters::OldTest < MiniTest::Unit::TestCase
+class Nanoc2::Filters::OldTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
   def test_filter
-    assert_raises(Nanoc::Error) do
+    assert_raises(Nanoc2::Error) do
       # Create site
       site = mock
 
@@ -16,11 +16,11 @@ class Nanoc::Filters::OldTest < MiniTest::Unit::TestCase
 
       # Create page rep
       page_rep = mock
-      page_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+      page_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
       page_rep.expects(:page).returns(page)
 
       # Get filter
-      filter = ::Nanoc::Filters::Old.new(page_rep)
+      filter = ::Nanoc2::Filters::Old.new(page_rep)
 
       # Run filter
       result = filter.run("blah")

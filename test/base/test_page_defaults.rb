@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::PageDefaultsTest < MiniTest::Unit::TestCase
+class Nanoc2::PageDefaultsTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -10,7 +10,7 @@ class Nanoc::PageDefaultsTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create page defaults
-    page_defaults = Nanoc::PageDefaults.new({ :foo => 'bar' })
+    page_defaults = Nanoc2::PageDefaults.new({ :foo => 'bar' })
     page_defaults.site = site
 
     # Create data source

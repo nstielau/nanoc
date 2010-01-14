@@ -1,4 +1,4 @@
-class CensorFilter < Nanoc::Filter
+class CensorFilter < Nanoc2::Filter
 
   identifier :censor
 

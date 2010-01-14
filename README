@@ -28,25 +28,25 @@ The source code is structured in a few directories:
   * *nanoc*
     * *base* contains the bare essentials necessary for nanoc to function
     * *binary_filters* contains the standard binary filters
-      (Nanoc::BinaryFilter subclasses) such as the thumbnail filter
+      (Nanoc2::BinaryFilter subclasses) such as the thumbnail filter
     * *cli* contains the commandline interface
-    * *data_sources* contains the standard data sources (Nanoc::DataSource
+    * *data_sources* contains the standard data sources (Nanoc2::DataSource
       subclasses), such as the filesystem data source
     * *helpers* contains helpers, which provide functionality some sites
       may find useful, such as the blogging and tagging helpers
     * *extra* contains stuff that is not needed by nanoc itself, but which may
       be used by helpers, data sources, filters or routers.
-    * *filters* contains the standard filters (Nanoc::Filter subclasses) such
+    * *filters* contains the standard filters (Nanoc2::Filter subclasses) such
       as ERB, Markdown, Haml, ...
-    * *routers* contains the standard routers (Nanoc::Router subclasses)
+    * *routers* contains the standard routers (Nanoc2::Router subclasses)
 * *test* contains test fixtures as well as testing code, structured in the
   same way as lib/nanoc
 
 The namespaces (modules) are organised like this:
 
-* *Nanoc* is the namespace for everything nanoc-related (obviously). The
-  classes in 'lib/nanoc/base' are part of this module (not Nanoc::Base which
-  does not exist)
+* *Nanoc2* is the namespace for everything nanoc-related (obviously). The
+  classes in 'lib/nanoc2/base' are part of this module (not Nanoc2::Base
+  which does not exist)
   * *BinaryFilters* contains the binary filters
   * *CLI* containing everything related to the commandline tool.
   * *DataSources* contains the data sources
@@ -55,7 +55,7 @@ The namespaces (modules) are organised like this:
   * *Filters* contains the (textual) filters
   * *Routers* contains the routers
 
-The central class in nanoc is Nanoc::Site, so you should start there if you
+The central class in nanoc is Nanoc2::Site, so you should start there if you
 want to explore nanoc from a technical perspective.
 
 == Contributors

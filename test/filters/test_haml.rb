@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::Filters::HamlTest < MiniTest::Unit::TestCase
+class Nanoc2::Filters::HamlTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -12,7 +12,7 @@ class Nanoc::Filters::HamlTest < MiniTest::Unit::TestCase
 
       # Create page
       page = mock
-      page_proxy = Nanoc::Proxy.new(page)
+      page_proxy = Nanoc2::Proxy.new(page)
       page.stubs(:site).returns(site)
       page.stubs(:to_proxy).returns(page_proxy)
       page.stubs(:attribute_named).with(:title).times(2).returns('Home', 'Home')
@@ -20,8 +20,8 @@ class Nanoc::Filters::HamlTest < MiniTest::Unit::TestCase
 
       # Create page rep
       page_rep = mock
-      page_rep_proxy = Nanoc::Proxy.new(page_rep)
-      page_rep.stubs(:is_a?).with(Nanoc::PageRep).returns(true)
+      page_rep_proxy = Nanoc2::Proxy.new(page_rep)
+      page_rep.stubs(:is_a?).with(Nanoc2::PageRep).returns(true)
       page_rep.stubs(:page).returns(page)
       page_rep.stubs(:to_proxy).returns(page_rep_proxy)
       page_rep.stubs(:attribute_named).times(3).returns({}, {}, {})
@@ -34,7 +34,7 @@ class Nanoc::Filters::HamlTest < MiniTest::Unit::TestCase
       site.stubs(:config).returns({})
 
       # Get filter
-      filter = ::Nanoc::Filters::Haml.new(page_rep)
+      filter = ::Nanoc2::Filters::Haml.new(page_rep)
 
       # Run filter (no assigns)
       result = filter.run('%html')

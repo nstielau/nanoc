@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::PageRepProxyTest < MiniTest::Unit::TestCase
+class Nanoc2::PageRepProxyTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -11,7 +11,7 @@ class Nanoc::PageRepProxyTest < MiniTest::Unit::TestCase
     page.expects(:attribute_named).with(:moo).returns('page attr moo')
 
     # Get page proxy
-    page_proxy = Nanoc::PageProxy.new(page)
+    page_proxy = Nanoc2::PageProxy.new(page)
     page.expects(:to_proxy).returns(page_proxy)
 
     # Get page rep
@@ -24,7 +24,7 @@ class Nanoc::PageRepProxyTest < MiniTest::Unit::TestCase
     page_rep.expects(:attribute_named).with(:'blah!').returns('page rep attr blah!')
 
     # Get page proxy
-    page_rep_proxy = Nanoc::PageRepProxy.new(page_rep)
+    page_rep_proxy = Nanoc2::PageRepProxy.new(page_rep)
 
     # Test
     assert_equal('page rep name',         page_rep_proxy.name)

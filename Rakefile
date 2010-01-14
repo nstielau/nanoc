@@ -6,12 +6,12 @@ require 'rake/gempackagetask'
 
 # nanoc itself
 $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/lib'))
-require 'nanoc'
+require 'nanoc2'
 
 ##### General details
 
-NAME      = 'nanoc'
-VERS      = Nanoc::VERSION
+NAME      = 'nanoc2'
+VERS      = Nanoc2::VERSION
 SUMMARY   = 'a tool that runs on your local computer and compiles ' +
             'Markdown, Textile, Haml, ... documents into static web pages'
 HOMEPAGE  = 'http://nanoc.stoneship.org/'
@@ -53,20 +53,20 @@ GemSpec = Gem::Specification.new do |s|
 
   s.has_rdoc              = true
   s.extra_rdoc_files      = [ 'README' ]
-  s.rdoc_options          <<  '--title'   << 'nanoc'                    <<
-                              '--main'    << 'README'                   <<
-                              '--charset' << 'utf-8'                    <<
-                              '--exclude' << 'lib/nanoc/cli/commands'   <<
-                              '--exclude' << 'lib/nanoc/binary_filters' <<
-                              '--exclude' << 'lib/nanoc/extra/vcses'    <<
-                              '--exclude' << 'lib/nanoc/filters'        <<
-                              '--exclude' << 'doc'                      <<
-                              '--exclude' << 'test'                     <<
-                              '--exclude' << 'vendor'                   <<
+  s.rdoc_options          <<  '--title'   << 'nanoc2'                    <<
+                              '--main'    << 'README'                    <<
+                              '--charset' << 'utf-8'                     <<
+                              '--exclude' << 'lib/nanoc2/cli/commands'   <<
+                              '--exclude' << 'lib/nanoc2/binary_filters' <<
+                              '--exclude' << 'lib/nanoc2/extra/vcses'    <<
+                              '--exclude' << 'lib/nanoc2/filters'        <<
+                              '--exclude' << 'doc'                       <<
+                              '--exclude' << 'test'                      <<
+                              '--exclude' << 'vendor'                    <<
                               '--line-numbers'
 
   s.files                 = %w( README LICENSE ChangeLog Rakefile ) + Dir[File.join('{bin,lib,vendor}', '**', '*')]
-  s.executables           = [ 'nanoc' ]
+  s.executables           = [ 'nanoc2' ]
   s.require_path          = 'lib'
   s.bindir                = 'bin'
 end

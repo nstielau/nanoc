@@ -1,23 +1,23 @@
 require 'test/helper'
 
-class Nanoc::LayoutTest < MiniTest::Unit::TestCase
+class Nanoc2::LayoutTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
   def test_initialize
     # Make sure attributes are cleaned
-    layout = Nanoc::Layout.new("content", { 'foo' => 'bar' }, '/foo/')
+    layout = Nanoc2::Layout.new("content", { 'foo' => 'bar' }, '/foo/')
     assert_equal({ :foo => 'bar' }, layout.attributes)
 
     # Make sure path is fixed
-    layout = Nanoc::Layout.new("content", { 'foo' => 'bar' }, 'foo')
+    layout = Nanoc2::Layout.new("content", { 'foo' => 'bar' }, 'foo')
     assert_equal('/foo/', layout.path)
   end
 
   def test_to_proxy
     # Create layout
-    layout = Nanoc::Layout.new("content", { 'foo' => 'bar' }, '/foo/')
+    layout = Nanoc2::Layout.new("content", { 'foo' => 'bar' }, '/foo/')
     assert_equal({ :foo => 'bar' }, layout.attributes)
 
     # Create proxy
@@ -29,7 +29,7 @@ class Nanoc::LayoutTest < MiniTest::Unit::TestCase
 
   def test_attribute_named
     # Create layout
-    layout = Nanoc::Layout.new("content", { 'foo' => 'bar' }, '/foo/')
+    layout = Nanoc2::Layout.new("content", { 'foo' => 'bar' }, '/foo/')
 
     # Check attributes
     assert_equal({ :foo => 'bar' }, layout.attributes)
@@ -37,7 +37,7 @@ class Nanoc::LayoutTest < MiniTest::Unit::TestCase
     assert_equal('erb', layout.attribute_named(:filter))
 
     # Create layout
-    layout = Nanoc::Layout.new("content", { 'filter' => 'bar' }, '/foo/')
+    layout = Nanoc2::Layout.new("content", { 'filter' => 'bar' }, '/foo/')
 
     # Check attributes
     assert_equal({ :filter => 'bar' }, layout.attributes)
@@ -47,11 +47,11 @@ class Nanoc::LayoutTest < MiniTest::Unit::TestCase
 
   def test_filter_class
     # Check existant filter class
-    layout = Nanoc::Layout.new("content", { 'filter' => 'erb' }, '/foo/')
-    assert_equal(Nanoc::Filters::ERB, layout.filter_class)
+    layout = Nanoc2::Layout.new("content", { 'filter' => 'erb' }, '/foo/')
+    assert_equal(Nanoc2::Filters::ERB, layout.filter_class)
 
     # Check nonexistant filter class
-    layout = Nanoc::Layout.new("content", { 'filter' => 'klasdfhl' }, '/foo/')
+    layout = Nanoc2::Layout.new("content", { 'filter' => 'klasdfhl' }, '/foo/')
     assert_equal(nil, layout.filter_class)
   end
 
@@ -60,7 +60,7 @@ class Nanoc::LayoutTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create layout
-    layout = Nanoc::Layout.new("content", { :attr => 'ibutes'}, '/path/')
+    layout = Nanoc2::Layout.new("content", { :attr => 'ibutes'}, '/path/')
     layout.site = site
 
     # Create data source
@@ -78,7 +78,7 @@ class Nanoc::LayoutTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create layout
-    layout = Nanoc::Layout.new("content", { :attr => 'ibutes'}, '/path/')
+    layout = Nanoc2::Layout.new("content", { :attr => 'ibutes'}, '/path/')
     layout.site = site
 
     # Create data source
@@ -96,7 +96,7 @@ class Nanoc::LayoutTest < MiniTest::Unit::TestCase
     site = mock
 
     # Create layout
-    layout = Nanoc::Layout.new("content", { :attr => 'ibutes'}, '/path/')
+    layout = Nanoc2::Layout.new("content", { :attr => 'ibutes'}, '/path/')
     layout.site = site
 
     # Create data source

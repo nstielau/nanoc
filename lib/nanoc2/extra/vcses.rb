@@ -1,0 +1,5 @@
+require 'nanoc2/extra/vcses/bazaar'
+require 'nanoc2/extra/vcses/dummy'
+require 'nanoc2/extra/vcses/git'
+require 'nanoc2/extra/vcses/mercurial'
+require 'nanoc2/extra/vcses/subversion'

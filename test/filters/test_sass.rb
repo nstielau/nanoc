@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::Filters::SassTest < MiniTest::Unit::TestCase
+class Nanoc2::Filters::SassTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -12,15 +12,15 @@ class Nanoc::Filters::SassTest < MiniTest::Unit::TestCase
 
       # Create page
       page = mock
-      page_proxy = Nanoc::Proxy.new(page)
+      page_proxy = Nanoc2::Proxy.new(page)
       page.stubs(:site).returns(site)
       page.stubs(:to_proxy).returns(page_proxy)
       page.stubs(:path).returns('/moo/')
 
       # Create page rep
       page_rep = mock
-      page_rep_proxy = Nanoc::Proxy.new(page_rep)
-      page_rep.stubs(:is_a?).with(Nanoc::PageRep).returns(true)
+      page_rep_proxy = Nanoc2::Proxy.new(page_rep)
+      page_rep.stubs(:is_a?).with(Nanoc2::PageRep).returns(true)
       page_rep.stubs(:page).returns(page)
       page_rep.stubs(:to_proxy).returns(page_rep_proxy)
       page_rep.stubs(:attribute_named).with(:sass_options).returns({})
@@ -33,7 +33,7 @@ class Nanoc::Filters::SassTest < MiniTest::Unit::TestCase
       site.stubs(:config).returns({})
 
       # Get filter
-      filter = ::Nanoc::Filters::Sass.new(page_rep)
+      filter = ::Nanoc2::Filters::Sass.new(page_rep)
 
       # Run filter
       result = filter.run(".foo #bar\n  color: #f00")
@@ -48,15 +48,15 @@ class Nanoc::Filters::SassTest < MiniTest::Unit::TestCase
 
       # Create asset
       asset = mock
-      asset_proxy = Nanoc::Proxy.new(asset)
+      asset_proxy = Nanoc2::Proxy.new(asset)
       asset.stubs(:to_proxy).returns(asset_proxy)
       asset.expects(:site).returns(site)
       asset.stubs(:path).returns('/moo/')
 
       # Create asset rep
       asset_rep = mock
-      asset_rep_proxy = Nanoc::Proxy.new(asset_rep)
-      asset_rep.expects(:is_a?).with(Nanoc::PageRep).returns(false)
+      asset_rep_proxy = Nanoc2::Proxy.new(asset_rep)
+      asset_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(false)
       asset_rep.expects(:asset).returns(asset)
       asset_rep.stubs(:to_proxy).returns(asset_rep_proxy)
       asset_rep.expects(:attribute_named).with(:sass_options).returns({})
@@ -69,7 +69,7 @@ class Nanoc::Filters::SassTest < MiniTest::Unit::TestCase
       site.stubs(:config).returns({})
 
       # Get filter
-      filter = ::Nanoc::Filters::Sass.new(asset_rep)
+      filter = ::Nanoc2::Filters::Sass.new(asset_rep)
 
       # Run filter
       result = filter.run(".foo #bar\n  color: #f00")

@@ -1,11 +1,11 @@
 require 'test/helper'
 
-class Nanoc::Helpers::LinkToTest < MiniTest::Unit::TestCase
+class Nanoc2::Helpers::LinkToTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
-  include Nanoc::Helpers::LinkTo
+  include Nanoc2::Helpers::LinkTo
 
   def test_link_to_with_path
     # Check

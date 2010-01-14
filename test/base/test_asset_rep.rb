@@ -1,20 +1,20 @@
 require 'test/helper'
 
-class Nanoc::AssetRepTest < MiniTest::Unit::TestCase
+class Nanoc2::AssetRepTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
   def test_initialize
     # Create asset defaults
-    asset_defaults = Nanoc::AssetDefaults.new(:foo => 'bar')
+    asset_defaults = Nanoc2::AssetDefaults.new(:foo => 'bar')
 
     # Create site
     site = mock
     site.expects(:asset_defaults).returns(asset_defaults)
 
     # Create asset
-    asset = Nanoc::Asset.new(nil, { 'foo' => 'bar' }, '/foo/')
+    asset = Nanoc2::Asset.new(nil, { 'foo' => 'bar' }, '/foo/')
     asset.site = site
 
     # Get rep
@@ -30,14 +30,14 @@ class Nanoc::AssetRepTest < MiniTest::Unit::TestCase
 
   def test_to_proxy
     # Create asset defaults
-    asset_defaults = Nanoc::AssetDefaults.new(:foo => 'bar')
+    asset_defaults = Nanoc2::AssetDefaults.new(:foo => 'bar')
 
     # Create site
     site = mock
     site.expects(:asset_defaults).returns(asset_defaults)
 
     # Create asset
-    asset = Nanoc::Asset.new(nil, { 'foo' => 'bar' }, '/foo/')
+    asset = Nanoc2::Asset.new(nil, { 'foo' => 'bar' }, '/foo/')
     asset.site = site
 
     # Get rep
@@ -56,8 +56,8 @@ class Nanoc::AssetRepTest < MiniTest::Unit::TestCase
     File.open('tmp/test.txt', 'w') { |io| io.write('old stuff') }
 
     # Create data
-    asset_defaults = Nanoc::AssetDefaults.new(:foo => 'bar')
-    asset = Nanoc::Asset.new(File.new('tmp/test.txt'), {}, '/foo/')
+    asset_defaults = Nanoc2::AssetDefaults.new(:foo => 'bar')
+    asset = Nanoc2::Asset.new(File.new('tmp/test.txt'), {}, '/foo/')
 
     # Create site and other requisites
     stack = []
@@ -110,16 +110,16 @@ class Nanoc::AssetRepTest < MiniTest::Unit::TestCase
 
   def test_outdated
     # Create asset defaults
-    asset_defaults = Nanoc::AssetDefaults.new(:foo => 'bar')
+    asset_defaults = Nanoc2::AssetDefaults.new(:foo => 'bar')
 
     # Create layouts
     layouts = [
-      Nanoc::Layout.new('layout 1', {}, '/layout1/'),
-      Nanoc::Layout.new('layout 2', {}, '/layout2/')
+      Nanoc2::Layout.new('layout 1', {}, '/layout1/'),
+      Nanoc2::Layout.new('layout 2', {}, '/layout2/')
     ]
 
     # Create code
-    code = Nanoc::Code.new('def stuff ; "moo" ; end')
+    code = Nanoc2::Code.new('def stuff ; "moo" ; end')
 
     # Create site
     site = mock
@@ -127,7 +127,7 @@ class Nanoc::AssetRepTest < MiniTest::Unit::TestCase
     site.expects(:code).at_least_once.returns(code)
 
     # Create asset
-    asset = Nanoc::Asset.new("content", { 'foo' => 'bar' }, '/foo/')
+    asset = Nanoc2::Asset.new("content", { 'foo' => 'bar' }, '/foo/')
     asset.site = site
     asset.build_reps
     asset_rep = asset.reps[0]
@@ -183,7 +183,7 @@ class Nanoc::AssetRepTest < MiniTest::Unit::TestCase
 
   def test_disk_and_web_path
     # Create asset defaults
-    asset_defaults = Nanoc::AssetDefaults.new(:foo => 'bar')
+    asset_defaults = Nanoc2::AssetDefaults.new(:foo => 'bar')
 
     # Create router
     router = mock
@@ -196,7 +196,7 @@ class Nanoc::AssetRepTest < MiniTest::Unit::TestCase
     site.expects(:router).times(2).returns(router)
 
     # Create asset
-    asset = Nanoc::Asset.new(nil, { :attr => 'ibutes' }, '/path/')
+    asset = Nanoc2::Asset.new(nil, { :attr => 'ibutes' }, '/path/')
     asset.site = site
     asset.build_reps
     asset_rep = asset.reps.find { |r| r.name == :default }
@@ -229,7 +229,7 @@ class Nanoc::AssetRepTest < MiniTest::Unit::TestCase
 
   def test_digest
     # Create asset rep
-    asset_rep = Nanoc::AssetRep.new(nil, nil, nil)
+    asset_rep = Nanoc2::AssetRep.new(nil, nil, nil)
 
     # Get some known hashes
     known_hashes = {

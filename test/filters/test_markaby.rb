@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::Filters::MarkabyTest < MiniTest::Unit::TestCase
+class Nanoc2::Filters::MarkabyTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -12,14 +12,14 @@ class Nanoc::Filters::MarkabyTest < MiniTest::Unit::TestCase
 
       # Create page
       page = mock
-      page_proxy = Nanoc::Proxy.new(page)
+      page_proxy = Nanoc2::Proxy.new(page)
       page.expects(:site).returns(site)
       page.expects(:to_proxy).returns(page_proxy)
 
       # Create page rep
       page_rep = mock
-      page_rep_proxy = Nanoc::Proxy.new(page_rep)
-      page_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+      page_rep_proxy = Nanoc2::Proxy.new(page_rep)
+      page_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
       page_rep.expects(:page).returns(page)
       page_rep.expects(:to_proxy).returns(page_rep_proxy)
 
@@ -30,7 +30,7 @@ class Nanoc::Filters::MarkabyTest < MiniTest::Unit::TestCase
       site.expects(:config).returns({})
 
       # Get filter
-      filter = ::Nanoc::Filters::Markaby.new(page_rep)
+      filter = ::Nanoc2::Filters::Markaby.new(page_rep)
 
       # Run filter
       result = filter.run("html do\nend")

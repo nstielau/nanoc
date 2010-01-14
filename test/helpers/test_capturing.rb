@@ -1,11 +1,11 @@
 require 'test/helper'
 
-class Nanoc::Helpers::CapturingTest < MiniTest::Unit::TestCase
+class Nanoc2::Helpers::CapturingTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
-  include Nanoc::Helpers::Capturing
+  include Nanoc2::Helpers::Capturing
 
   def test_content_for
     # Build content to be evaluated

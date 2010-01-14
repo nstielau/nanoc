@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::CLI::SwitchCommandTest < MiniTest::Unit::TestCase
+class Nanoc2::CLI::SwitchCommandTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end

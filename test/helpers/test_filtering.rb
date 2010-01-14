@@ -1,11 +1,11 @@
 require 'test/helper'
 
-class Nanoc::Helpers::FilteringTest < MiniTest::Unit::TestCase
+class Nanoc2::Helpers::FilteringTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
 
-  include Nanoc::Helpers::Filtering
+  include Nanoc2::Helpers::Filtering
 
   def test_filter
     if_have 'rubypants' do
@@ -20,7 +20,7 @@ class Nanoc::Helpers::FilteringTest < MiniTest::Unit::TestCase
       site = mock
       page.expects(:site).returns(site)
       @_obj_rep = mock
-      @_obj_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+      @_obj_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
       @_obj_rep.expects(:page).returns(page)
 
       # Evaluate content

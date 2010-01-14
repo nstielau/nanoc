@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class Nanoc::Filters::RelativizePathsTest < MiniTest::Unit::TestCase
+class Nanoc2::Filters::RelativizePathsTest < MiniTest::Unit::TestCase
 
   def setup    ; global_setup    ; end
   def teardown ; global_teardown ; end
@@ -11,11 +11,11 @@ class Nanoc::Filters::RelativizePathsTest < MiniTest::Unit::TestCase
     site = mock
     page.expects(:site).returns(site)
     obj_rep = mock
-    obj_rep.expects(:is_a?).with(Nanoc::PageRep).returns(true)
+    obj_rep.expects(:is_a?).with(Nanoc2::PageRep).returns(true)
     obj_rep.expects(:page).returns(page)
 
     # Create filter with mock item
-    filter = Nanoc::Filters::RelativizePaths.new(obj_rep)
+    filter = Nanoc2::Filters::RelativizePaths.new(obj_rep)
 
     # Check
     assert_raises(RuntimeError) do
