@@ -3,6 +3,17 @@
 # Add lib to load path
 $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/../lib'))
 
+# Print deprecation warning
+$stderr.puts <<-EOS
++----------------------------------------------------------------------------+
+| WARNING: nanoc 2.x has been superseded by nanoc 3.x and is no longer main- |
+| tained. There will be no future updates to nanoc 2.x. Consider upgrading   |
+| to nanoc 3.x. For more information, see the nanoc 2.x-to-3.x migration     |
+| guide at <http://nanoc.stoneship.org/migrating/>.                          |
++----------------------------------------------------------------------------+
+EOS
+$stderr.puts
+
 # Load nanoc
 require 'nanoc2'
 require 'nanoc2/cli'
